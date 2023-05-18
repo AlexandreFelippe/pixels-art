@@ -1,18 +1,22 @@
-//Exercicio 01
-const h1 = document.createElement('h1');
-h1.innerText = 'Paleta de Cores'
-document.body.appendChild(h1)
-const title = document.querySelector('h1');
-title.id = 'title'
 // Exercicio 02 - 2 - Adicione à página uma paleta contendo quatro cores distintas
 //A página deve conter uma paleta com quatro opções de cores
-function paletaDeCores (black, blue, red, green){
-for (let index = 0; index < 5; index += 1) {
-    index = paletaDeCores[index];
-    console.log(paletaDeCores[index])
-}}
+const colorPallete = document.getElementById('color-palette');
 
-
+function buttons() {
+    const cores = ['black', 'blue', 'red', 'green'];
+    for (let index = 0; index < 4; index += 1) {
+    const button = document.createElement('div');
+    button.style.backgroundColor = cores[index];
+    button.style.width = '50px'
+    button.style.height = '50px'
+    button.style.border = '1px solid black'
+    button.className = 'color';
+    colorPallete.className = "color-palette"
+    colorPallete.appendChild(button);
+}
+return buttons;
+}
+buttons();
 //A paleta de cores deve ser um elemento com id denominado color-palette, e cada cor individual contida na paleta de cores deve possuir a classe chamada color;
 //A cor de fundo de cada elemento da paleta deverá ser a cor que o elemento representa. A única cor não permitida na paleta é a cor branca;
 
