@@ -1,8 +1,10 @@
+//3
 const colorPallete = document.getElementById('color-palette');
 const color = document.querySelectorAll('.color')
+const btn = document.getElementById('button-random-color')
 
 function buttons() {
-    const cores = ['black', 'blue', 'red', 'green'];
+    const cores = ['black', 'blue', 'red', 'green', 'orange'];
     for (let index = 0; index < 4; index += 1) {
     const button = document.createElement('div');
     button.style.backgroundColor = cores[index];
@@ -16,14 +18,20 @@ function buttons() {
 return buttons;
 }
 buttons();
+
+
 //4
-function randonColor() {
-    for (let index = 1; index < color.lenght; index +=1) {
-        const array = [];
-        for (let index1 = 0; index1 < 3; index1 +=1 ) {
-        array.push (color[index1]).style.rgb('$index $index $index')
-        }
+  function coresRGB() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+  
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  function clickCoresAleatorias() {
+			const color2 = document.getElementsByClassName('color'); 
+			for (let index = 1; index <= 3; index += 1) {
+      color2[index].style.backgroundColor = coresRGB();
+ 		}
     }
-return randonColor;
-}
-randonColor();
+		btn.addEventListener('click', clickCoresAleatorias);
