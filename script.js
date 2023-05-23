@@ -1,7 +1,8 @@
 //3
 const colorPallete = document.getElementById('color-palette');
-const color = document.querySelectorAll('.color')
-const btn = document.getElementById('button-random-color')
+const color = document.getElementsByClassName('color'); 
+const btn = document.getElementById('button-random-color');
+const bigPixel = document.getElementById('pixel-board');
 
 function buttons() {
     const cores = ['black', 'blue', 'red', 'green', 'orange'];
@@ -29,9 +30,60 @@ buttons();
     return `rgb(${r}, ${g}, ${b})`;
   }
   function clickCoresAleatorias() {
-			const color2 = document.getElementsByClassName('color'); 
 			for (let index = 1; index <= 3; index += 1) {
-      color2[index].style.backgroundColor = coresRGB();
+      color[index].style.backgroundColor = coresRGB();
  		}
+		
     }
 		btn.addEventListener('click', clickCoresAleatorias);
+//5
+
+function storagePallete() {
+	const palette = [];
+	for (let index = 0; index < color.length; index +=1) {
+		palette.push(color[index].style.backgroundColor);
+		console.log(palette);
+	}
+	localStorage.setItem('colorPalette', JSON.stringify(palette));
+}
+	btn.addEventListener('click', storagePallete);
+	function getPallete () {
+		const coresStorage = localStorage.getItem('colorPalette')
+		const json = JSON.parse(coresStorage)
+		if (json) {
+		for (let index = 0; index < color.length; index++) {
+			color[index].style.backgroundColor = json[index]		
+		}
+		}
+	}
+getPallete()
+//6
+const pixelsBoard = () => {
+	bigPixel.style.width = '210px';
+	for (let index = 0; index <5 ; index += 1) {
+		for (let index = 0; index <5 ; index += 1){
+		const pixel = document.createElement('div');
+		pixel.className = 'pixel'
+		pixel.style.display = 'inline-block'
+		pixel.style.border = 'solid black 1px'
+		pixel.style.background = 'white'
+		pixel.style.height = "40px"
+		pixel.style.width = "40px"
+		bigPixel.appendChild(pixel)
+		}
+	}
+}
+pixelsBoard()
+
+//9
+const changeSelect = () => {
+	color[0].classList.add('selected');
+	colorPallete.addEventListener('click', (event) => {
+	for (let index = 0; index < color.length; index +=1) {
+		color[index].classList.remove('selected');		
+	}
+	event.target.classList.add('selected')
+	});
+}
+changeSelect()
+//10
