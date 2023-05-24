@@ -3,6 +3,7 @@ const colorPallete = document.getElementById('color-palette');
 const color = document.getElementsByClassName('color'); 
 const btn = document.getElementById('button-random-color');
 const bigPixel = document.getElementById('pixel-board');
+const pixel = document.getElementsByClassName('pixel')
 
 function buttons() {
     const cores = ['black', 'blue', 'red', 'green', 'orange'];
@@ -42,7 +43,7 @@ function storagePallete() {
 	const palette = [];
 	for (let index = 0; index < color.length; index +=1) {
 		palette.push(color[index].style.backgroundColor);
-		console.log(palette);
+		
 	}
 	localStorage.setItem('colorPalette', JSON.stringify(palette));
 }
@@ -87,3 +88,22 @@ const changeSelect = () => {
 }
 changeSelect()
 //10
+const selectedColors = () =>	document.querySelector('.selected').style.backgroundColor
+selectedColors();
+const paintPixels = () => {
+	const paintPixel = document.querySelectorAll('.pixel');
+	for (let index = 0; index < paintPixel.length; index +=1){
+		paintPixel[index].addEventListener('click', (event) =>{
+			event.target.style.backgroundColor = selectedColors();
+			})
+			}
+}
+paintPixels()
+//11
+const button = document.getElementById("clear-board")
+const clearButton = () => {
+	button.addEventListener('click', (event) => {
+		for (let index = 0; index < pixel.length; index +=1)
+	pixel[index].style.backgroundColor = 'white'
+})}
+clearButton();
