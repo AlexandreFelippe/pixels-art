@@ -1,109 +1,108 @@
-//3
+// 3
 const colorPallete = document.getElementById('color-palette');
-const color = document.getElementsByClassName('color'); 
+const color = document.getElementsByClassName('color');
 const btn = document.getElementById('button-random-color');
 const bigPixel = document.getElementById('pixel-board');
-const pixel = document.getElementsByClassName('pixel')
+const pixel = document.getElementsByClassName('pixel');
 
 function buttons() {
-    const cores = ['black', 'blue', 'red', 'green', 'orange'];
-    for (let index = 0; index < 4; index += 1) {
+  const cores = ['black', 'white', 'blue', 'red', 'green', 'orange', 'pink', 'yellow', 'purple', 'brown', 'grey', 'white'];
+  for (let index = 0; index < 10; index += 1) {
     const button = document.createElement('div');
     button.style.backgroundColor = cores[index];
-    button.style.width = '50px'
-    button.style.height = '50px'
-    button.style.border = '1px solid black'
+    button.style.width = '50px';
+    button.style.height = '50px';
+    button.style.border = '1px solid black';
     button.className = 'color';
-    colorPallete.className = "color-palette"
+    colorPallete.className = 'color-palette';
     colorPallete.appendChild(button);
-}
-return buttons;
+  }
+  return buttons;
 }
 buttons();
 
+// 4
+function coresRGB() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
 
-//4
-  function coresRGB() {
-    let r = Math.floor(Math.random() * 255);
-    let g = Math.floor(Math.random() * 255);
-    let b = Math.floor(Math.random() * 255);
-  
-    return `rgb(${r}, ${g}, ${b})`;
+  return `rgb(${r}, ${g}, ${b})`;
+}
+function clickCoresAleatorias() {
+  for (let index = 1; index <= 10; index += 1) {
+    color[index].style.backgroundColor = coresRGB();
   }
-  function clickCoresAleatorias() {
-			for (let index = 1; index <= 3; index += 1) {
-      color[index].style.backgroundColor = coresRGB();
- 		}
-		
-    }
-		btn.addEventListener('click', clickCoresAleatorias);
-//5
+}
+btn.addEventListener('click', clickCoresAleatorias);
+// 5
 
 function storagePallete() {
-	const palette = [];
-	for (let index = 0; index < color.length; index +=1) {
-		palette.push(color[index].style.backgroundColor);
-		
-	}
-	localStorage.setItem('colorPalette', JSON.stringify(palette));
+  const palette = [];
+  for (let index = 0; index < color.length; index += 1) {
+    palette.push(color[index].style.backgroundColor);
+  }
+  localStorage.setItem('colorPalette', JSON.stringify(palette));
 }
-	btn.addEventListener('click', storagePallete);
-	function getPallete () {
-		const coresStorage = localStorage.getItem('colorPalette')
-		const json = JSON.parse(coresStorage)
-		if (json) {
-		for (let index = 0; index < color.length; index++) {
-			color[index].style.backgroundColor = json[index]		
-		}
-		}
-	}
-getPallete()
-//6
+btn.addEventListener('click', storagePallete);
+function getPallete() {
+  const coresStorage = localStorage.getItem('colorPalette');
+  const json = JSON.parse(coresStorage);
+  if (json) {
+    for (let index = 0; index < color.length; index += 1) {
+      color[index].style.backgroundColor = json[index];
+    }
+  }
+}
+getPallete();
+// 6
 const pixelsBoard = () => {
-	bigPixel.style.width = '210px';
-	for (let index = 0; index <5 ; index += 1) {
-		for (let index = 0; index <5 ; index += 1){
-		const pixel = document.createElement('div');
-		pixel.className = 'pixel'
-		pixel.style.display = 'inline-block'
-		pixel.style.border = 'solid black 1px'
-		pixel.style.background = 'white'
-		pixel.style.height = "40px"
-		pixel.style.width = "40px"
-		bigPixel.appendChild(pixel)
-		}
-	}
-}
-pixelsBoard()
+  bigPixel.style.width = '1100px';
+  for (let index = 0; index < 20; index += 1) {
+    for (let index = 0; index < 20; index += 1) {
+      const pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      pixel.style.display = 'inline-block';
+      pixel.style.border = 'solid black 1px';
+      pixel.style.background = 'white';
+      pixel.style.height = '20px';
+      pixel.style.width = '20px';
+      pixel.style.borderRadius = '50px';
+      bigPixel.appendChild(pixel);
+    }
+  }
+};
+pixelsBoard();
 
-//9
+// 9
 const changeSelect = () => {
-	color[0].classList.add('selected');
-	colorPallete.addEventListener('click', (event) => {
-	for (let index = 0; index < color.length; index +=1) {
-		color[index].classList.remove('selected');		
-	}
-	event.target.classList.add('selected')
-	});
-}
-changeSelect()
-//10
-const selectedColors = () =>	document.querySelector('.selected').style.backgroundColor
+  color[0].classList.add('selected');
+  color[1].classList.add('selected');
+  colorPallete.addEventListener('click', (event) => {
+    for (let index = 0; index < color.length; index += 1) {
+      color[index].classList.remove('selected');
+    }
+    event.target.classList.add('selected');
+  });
+};
+changeSelect();
+// 10
+const selectedColors = () => document.querySelector('.selected').style.backgroundColor;
 selectedColors();
 const paintPixels = () => {
-	const paintPixel = document.querySelectorAll('.pixel');
-	for (let index = 0; index < paintPixel.length; index +=1){
-		paintPixel[index].addEventListener('click', (event) =>{
-			event.target.style.backgroundColor = selectedColors();
-			})
-			}
-}
-paintPixels()
-//11
-const button = document.getElementById("clear-board")
+  const paintPixel = document.querySelectorAll('.pixel');
+  for (let index = 0; index < paintPixel.length; index += 1) {
+    paintPixel[index].addEventListener('click', (event) => {
+      event.target.style.backgroundColor = selectedColors();
+    });
+  }
+};
+paintPixels();
+// 11
+const button = document.getElementById('clear-board');
 const clearButton = () => {
-	button.addEventListener('click', (event) => {
-		for (let index = 0; index < pixel.length; index +=1)
-	pixel[index].style.backgroundColor = 'white'
-})}
+  button.addEventListener('click', (event) => {
+    for (let index = 0; index < pixel.length; index += 1) { pixel[index].style.backgroundColor = 'white'; }
+  });
+};
 clearButton();
