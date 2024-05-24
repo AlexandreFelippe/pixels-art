@@ -6,7 +6,8 @@ const bigPixel = document.getElementById('pixel-board');
 const pixel = document.getElementsByClassName('pixel');
 
 function buttons() {
-  const cores = ['black', 'white', 'blue', 'red', 'green', 'orange', 'pink', 'yellow', 'purple', 'brown', 'grey', 'white'];
+  const cores = ['black', 'white', 'blue', 'red', 'green', 'orange',
+    'pink', 'yellow', 'purple', 'brown', 'grey', 'white'];
   for (let index = 0; index < 10; index += 1) {
     const button = document.createElement('div');
     button.style.backgroundColor = cores[index];
@@ -59,16 +60,16 @@ getPallete();
 const pixelsBoard = () => {
   bigPixel.style.width = '1100px';
   for (let index = 0; index < 20; index += 1) {
-    for (let index = 0; index < 20; index += 1) {
-      const pixel = document.createElement('div');
-      pixel.className = 'pixel';
-      pixel.style.display = 'inline-block';
-      pixel.style.border = 'solid black 1px';
-      pixel.style.background = 'white';
-      pixel.style.height = '20px';
-      pixel.style.width = '20px';
-      pixel.style.borderRadius = '50px';
-      bigPixel.appendChild(pixel);
+    for (let i = 0; i < 20; i += 1) {
+      const pixel1 = document.createElement('div');
+      pixel1.className = 'pixel';
+      pixel1.style.display = 'inline-block';
+      pixel1.style.border = 'solid black 1px';
+      pixel1.style.background = 'white';
+      pixel1.style.height = '20px';
+      pixel1.style.width = '20px';
+      pixel1.style.borderRadius = '50px';
+      bigPixel.appendChild(pixel1);
     }
   }
 };
@@ -92,8 +93,8 @@ selectedColors();
 const paintPixels = () => {
   const paintPixel = document.querySelectorAll('.pixel');
   for (let index = 0; index < paintPixel.length; index += 1) {
-    paintPixel[index].addEventListener('click', (event) => {
-      event.target.style.backgroundColor = selectedColors();
+    paintPixel[index].addEventListener('click', (e) => {
+      e.target.style.backgroundColor = selectedColors();
     });
   }
 };
@@ -101,8 +102,10 @@ paintPixels();
 // 11
 const button = document.getElementById('clear-board');
 const clearButton = () => {
-  button.addEventListener('click', (event) => {
-    for (let index = 0; index < pixel.length; index += 1) { pixel[index].style.backgroundColor = 'white'; }
+  button.addEventListener('click', () => {
+    for (let index = 0; index < pixel.length; index += 1) {
+      pixel[index].style.backgroundColor = 'white';
+    }
   });
 };
 clearButton();
